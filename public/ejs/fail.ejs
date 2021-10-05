@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('../partials/top') %>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Miriam+Libre&display=swap');
+
+
+
+    * {
+        padding: 0;
+        margin: 0;
+        direction: rtl;
+        font-family: 'Varela Round', sans-serif;
+    }
+    .page{
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+    .errStatus{
+        color: #6a62f5;
+        font-size: 42px;
+        margin-top: 20px;
+    }
+    .errMessage{
+        background: rgb(236, 236, 236);
+        width: 450px;
+        max-width: 90%;
+        padding: 20px 0;
+        margin: 20px 0;
+        box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    }
+    .errMessage p{
+        font-family: 'Miriam Libre', sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .errMessage p a{
+        display: inline-block;
+        margin-top: 7.5px;
+        color: #6a62f5;
+        transition: .4s;
+    }
+    .errMessage p a:hover{
+        letter-spacing: .5px;
+        font-size: 15px;
+    }
+    .mainbtn{
+        margin-top: 20px;
+        display: inline-block;
+        padding: 10px 22.5px;
+        border-radius: 20px;
+        color: #6a62f5;
+        font-weight: bold;
+        text-decoration: none;
+        background: rgb(250, 250, 250);
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+        transition: .3s;
+    }
+    .mainbtn:hover{
+        color: white;
+        background: #6a62f5;
+    }
+</style>
+<body>
+    <div class="page">
+        <img src="imgs/fail.svg" alt="">
+        <% if(errStatus != 'undefined') { %>
+            <h1 class="errStatus"><%= errStatus %></h2>
+        <% } %>
+        <div class="errMessage">
+            <p>
+                <%= err %>
+                <% if(typeof(link) !== 'undefined') { %>
+                    <br>
+                    <a href="/b/<%= link %>">http://localhost:3000/b/<%= link %></a>
+                <% } %>
+            </p>
+        </div>
+        <a class="mainbtn" href="/">
+            לדף הבית
+            <i class="fas fa-caret-left"></i>
+        </a>
+    </div>
+<%- include('../partials/bottom') %>

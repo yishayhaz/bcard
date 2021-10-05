@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('../partials/top') %>
+    <link rel="stylesheet" href="css/signup.css">
+</head>
+<body>
+    <div class="container">
+        <h2>התחברות \ הרשמה</h2>
+        <div class="content" >
+            <div>
+                <form action="signup" method="POST" data-aos="<%= typeof email != 'undefined' ? '' : 'fade-up' %>" data-aos-delay="<%= typeof email != 'undefined' ? '' : '500' %>">
+                    <label>
+                        <label for="email">תיבת אימייל:</label>
+                        <input type="email" name="email" placeholder="תיבת האימייל"
+                            value="<%= typeof email != 'undefined' ? email : '' %>"
+                        >
+                        <span class="err">
+                            <% if(typeof(EmailErr) != 'undefined') { %> 
+                                <%= EmailErr %>
+                            <% } %>
+                        </span>
+                    </label>
+                    <label>
+                        <label for="email">סיסמה:</label>
+                        <input type="password" name="password" placeholder="הכנס סיסמא">
+                        <span class="err">
+                            <% if(typeof(PassErr) != 'undefined') { %> 
+                                <%= PassErr %>
+                            <% } %>
+                        </span>
+                    </label>
+                    <button type="submit">התחבר</button>
+                    <% if(typeof(PassErr) != 'undefined') { %>
+                        <span class="forgot_password" href="#">
+                            שכחת סיסמא?
+                            <a href="https://api.whatsapp.com/send?phone=+972546144870&text=היי, שכחתי את הסיסמא לחשבון שלי, תוכל לעזור לי?",target="blank">צור קשר לאיפוס סיסמא &#8592;</a>
+                        </span>
+                    <% } %>
+                </form>
+            </div>
+            <div class="svg" data-aos="<%= typeof email != 'undefined' ? '' : 'fade-left' %>">
+                <img src="imgs/signup.svg" />
+            </div>
+        </div>
+    </div>
+ <%- include('../partials/bottom') %>

@@ -1,0 +1,29 @@
+<div class="input-group">
+    <input onfocus="ltrInput(this)" type="email" id="bemail" name="bemail" placeholder="תיבת המייל">
+    <label for="bemail"></label>
+    <span class="bottom-note"></span>
+</div>
+<div class="input-group">
+    <input oninput="ltrInput(this)" maxlength=13 type="tel" id="btel" name="btel" placeholder="מספר טלפון">
+    <label for="btel"></label>
+    <span class="bottom-note"></span>
+</div>
+<div class="input-group">
+    <input oninput="ltrInput(this)" maxlength=13 type="whatsapp" id="whatsapp" name="whatsapp" placeholder="מספר טלפון (ווצאפ)">
+    <label for="whatsapp"></label>
+    <span class="bottom-note"></span>
+</div>
+<div class="input-group">
+    <div class="info" style="top: calc(75% - 10px)">
+        <i class="fas fa-info-circle"></i>
+        <p class="explanation">
+            <b>Waze / Google Maps</b>
+        </p>
+    </div>
+    <div class="inputs-i">
+        <input minlength=5 maxlength=35 type="text" id="tlocation" name="tlocation" placeholder="מיקום (טקסט)">
+        <input oninput="ltrInput(this, 'm')" type="text" id="llocation" name="llocation" placeholder="קישור (אופציונלי)">
+    </div>
+        <label for="tlocation"></label>
+        <span class="bottom-note"></span>
+</div>

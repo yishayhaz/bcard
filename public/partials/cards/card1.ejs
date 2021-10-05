@@ -1,0 +1,23 @@
+<div class="input-group">
+    <input maxlength="15" value="" onkeyup="if (/[^|a-z0-9]+/g.test(this.value)) this.value = this.value.replace(/[^|a-z0-9]+/g,'')" type="text" id="lname" name="lname" placeholder="שם העסק לקישור (אנגלית a~z, ללא רווחים)">
+    <label for="lname">https://DigitalCard.com/b/<span id="link-name-span"></span></label>
+    <span class="bottom-note"></span>
+</div>
+<div class="input-group">
+    <div class="info">
+        <i class="fas fa-info-circle"></i>
+        <p class="explanation">
+            לדוגמא:
+            <b>תוכיוסי - חנות חיות</b>
+        </p>
+    </div>
+    <input minlength="10" maxlength="50" type="text" id="bname" name="bname" placeholder="שם העסק (כותרת)">
+    <label for="bname"></label>
+    <span class="bottom-note"></span>
+</div>
+<div class="input-group">
+    <textarea id="description" name="description" maxlength="200" placeholder="כמה מילים עליכם..."></textarea>
+    <label for="description"></label>
+    <span class="bottom-note"></span>
+    <span class="bottom-note" style="bottom: 20px;right: 5spx">200/<span id="textarea-length">0</span></span>
+</div>

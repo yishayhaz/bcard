@@ -1,0 +1,242 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: 'Varela Round', sans-serif;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+    }
+
+    .card .left {
+        position: relative;
+        width: 40%;
+        clip-path: polygon(0 0, 66% 0, 100% 100%, 0% 100%);
+        background-color: #CF4D4D;
+        display: grid;
+        place-items: center;
+    }
+
+    .card .left .logo {
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        left: 17%;
+        border-radius: 50%;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    .card .right {
+        width: 60%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+        direction: rtl;
+    }
+    .card .right>div{
+        margin: 15px 0;
+        width: 75%;
+    }
+    .card .right .content h1{
+        text-align: center;
+    }
+    .card .right .content p{
+        width: 500px;
+        max-width: 80%;
+        margin-right: 10%;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .contact-us{
+        text-align: center;
+    }
+    .contact-us a i {
+        font-size: 20px;
+    }
+    .contact-us a{
+        display: inline-block;
+        font-size: 22px;
+        margin: 0 10px;
+        background: cyan;
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        line-height: 50px;
+        background: rgba(233, 233, 233, 0.767);
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        transition: .3s;
+    }
+    .card .right .contact-us a.whatsapp{color:#4DCF6A}
+    .card .right .contact-us a.whatsapp:hover{background:#4DCF6A;color: white}
+
+    .card .right .contact-us a.email{color:#CF4D4D}
+    .card .right .contact-us a.email:hover{background: #CF4D4D;color: white}
+
+    .card .right .contact-us a.tel{color: #CCCF4D}
+    .card .right .contact-us a.tel:hover{background: #CCCF4D;color: white}
+
+    .card .right ul{
+        list-style: none;
+        text-align: center;
+    }
+    .card .right ul i{
+        margin-left: 10px;
+    }
+    .card .right ul li{
+        direction: rtl;
+        margin: 15px 15px;
+        font-size: 14px;
+    }
+    a{
+        color: #CF4D4D;
+        text-decoration: none;
+    }
+    a:focus, a:visited{
+        color: #CF4D4D;
+    }
+    a:hover{
+        text-decoration: underline;
+    }
+    .location ul li{
+        text-align: center;
+    }
+    @media (max-width: 991px) {
+        .card{
+            flex-direction: column;
+        }
+        .card .left{
+            padding: 20px 0;
+            width: 100%;
+            clip-path: none;
+            display: grid;
+            place-items: center;
+        }
+        .card .left .logo{
+            position: relative;
+            height: 100px;
+            width: 100px;
+            left: 0;
+        }
+        .card .right{
+            width: 80%;
+            margin-left: 10%;
+            text-align: center;
+        }
+        .card .right>div{
+            width: 90%;
+        }
+        .card .right .content{
+            margin-top: 50px;
+            display: grid;
+            place-items: center;
+        }
+        .card .right .content p{
+            margin-top: 25px;
+            text-align: center;
+            width: 80%;
+        }
+    }
+</style>
+<div class="card">
+    <div class="left">
+        <img src="uploads/<%= data.logo_location %>" alt="logo" class="logo">
+    </div>
+    <div class="right">
+        <div class="content">
+            <h1>
+                <%= data.bname %>
+            </h1>
+            <p>
+                <%= data.description %>
+            </p>
+        </div>
+        <div class="contact-us">
+            <% if(data.whatsapp !== '') { %>
+                <a class="whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=<%= data.whatsapp %>"><i class="fab fa-whatsapp"></i></a>
+            <% } %>
+            <% if(data.bemail !== '') { %>
+                <a class="email" target="_blank" href="mailto:<%= data.bemail %>"><i class="fas fa-at"></i></a>
+            <% } %>
+            <% if(data.btel !== '') { %>
+                <a class="tel" target="_blank" href="tel:<%= data.btel %>"><i class="fas fa-phone"></i></a>
+            <% } %>
+        </div>
+        <div class="links">
+            <ul>
+                <% if(data.facebook_username != '') { %>
+                    <li>
+                        <i class="fab fa-facebook"></i>
+                        <a
+                            target="_blank"
+                            href=<%= data.facebook_link !== '' ?
+                                data.facebook_link :
+                                "https://www.google.com/search?q=" + data.facebook_username + "+site%3Afacebook.com"
+                            %>
+                        >
+                            <%= data.facebook_username %>
+                        </a>
+                    </li>
+                <% } %>
+                <% if(data.instagram_username != '') { %>
+                    <li>
+                        <i class="fab fa-instagram"></i>
+                        <a
+                            target="_blank"
+                            href=<%= data.instagram_link !== '' ?
+                                data.instagram_link :
+                                "https://www.google.com/search?q=" + data.instagram_username + "+site%3Ainstagram.com"
+                            %>
+                        >
+                            <%= data.instagram_username %>
+                        </a>
+                    </li>
+                <% } %>
+                <% if(data.twitter_username != '') { %>
+                    <li>
+                        <i class="fab fa-twitter"></i>
+                        <a
+                            target="_blank"
+                            href=<%= data.twitter_link !== '' ?
+                                data.twitter_link :
+                                "https://www.google.com/search?q=" + data.twitter_username + "+site%3Atwitter.com"
+                            %>
+                        >
+                            <%= data.twitter_username %>
+                        </a>
+                    </li>
+                <% } %>
+                <% if(data.tiktok_username != '') { %>
+                    <li>
+                        <i class="fab fa-tiktok"></i>
+                        <a
+                            target="_blank"
+                            href=<%= data.tiktok_link !== '' ?
+                                data.tiktok_link :
+                                "https://www.google.com/search?q=" + data.tiktok_username + "+site%3Atiktok.com"
+                            %>
+                        >
+                            <%= data.tiktok_username %>
+                        </a>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+        <% if(data.tlocation != '') { %>
+            <div class="location">
+                <ul>
+                    <li>
+                        <i class="fas fa-search-location"></i>
+                <a target="_blank" href="<%= data.llocation != "" ? data.llocation : `https://www.google.com/maps/place/${data.tlocation.split(' ').join('+')}` %>">
+                    <%= data.tlocation %>
+                </a>
+                    </li>
+                </ul>
+            </div>
+        <% } %>
+    </div>
+</div>

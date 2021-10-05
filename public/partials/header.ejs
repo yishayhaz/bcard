@@ -1,0 +1,69 @@
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Suez+One&display=swap");
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: "Varela Round", sans-serif;
+        direction: rtl;
+    }
+    header {
+        width: 100%;
+        height: 60px;
+        background: white;
+    }
+    .header {
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+    }
+    header div h1 {
+        font-size: 20px;
+    }
+    header div {
+        height: 60px;
+        line-height: 60px;
+    }
+    header .left a {
+        padding: 5px 12px;
+        font-size: 12px;
+        color: white;
+        text-decoration: none;
+        border-radius: 20px;
+        background: #6a62f5;
+        transition: 0.5s;
+    }
+    header div > span {
+        font-weight: bold;
+    }
+    header div span {
+        font-size: 12px;
+    }
+    header div span span {
+        font-weight: normal;
+        color: #6a62f5;
+    }
+    @media (max-width: 500px) {
+        header div h1 {
+            font-size: 15px;
+        }
+    }
+</style>
+<header data-aos="fade-down">
+    <div class="header">
+        <div>
+            <h1><a style="color: inherit; text-decoration: none;" href="/">D&M DigitalCard</a></h1>
+        </div>
+        <div class="left">
+            <% if(username == 'undefined') { %>
+                <a class="bg-hover-darker" href='/signup'>התחברות \ הרשמה</a>
+            <% } else { %>
+                <span class="username">
+                    שלום, 
+                    <span id="username"><%= username %></span>
+                </span>
+            <% } %>
+        </div>
+    </div>
+</header>

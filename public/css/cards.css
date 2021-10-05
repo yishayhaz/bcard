@@ -1,0 +1,249 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Varela Round', sans-serif;
+    direction: rtl;
+}
+body{
+    height: 100vh;
+    background: linear-gradient(-45deg,#524AE8, #8681f5);
+}
+.floating-boxes{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 90vh;
+    top: 5vh;
+    left: 5%;
+}
+.floating-box{
+    position: relative;
+    width: 200px;
+    margin: 50px 0;
+}
+.f-box{
+    margin-right: 75px;
+}
+.s-box{
+    margin-right: -75px;
+}
+.card{
+    direction: rtl;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 20px;
+    max-width: 80%;
+    width: 500px;
+    background: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+.card .headline{
+    display: grid;
+    place-items: center;
+}
+.card .headline h1{
+    font-family: 'Secular One', sans-serif;
+    margin: 0;
+}
+.card .headline span{
+    font-size: 12px;
+    border-radius: 20px;
+    color: white;
+    padding: 2px 10px;
+    font-weight: bold;
+    margin-top: -5px;
+    background: #FC8856;
+}
+.card .headline span a{
+    color: #007ACC;
+}
+.card .inputs{
+    margin-top: 20px;
+    flex-direction: column;
+    width: 80%;
+    display: flex;
+}
+.card .inputs .inputs-card{
+    display: none;
+}
+.card .inputs .inputs-card.a{
+    display: block;
+    animation: appeare .3s linear;
+}
+@keyframes appeare{
+    from {
+        opacity: 0;
+        margin-right: -75px;
+        margin-left: 75px;
+    } to {
+        opacity: 1;
+        margin-right: 0px;
+        margin-left: 0;
+    }
+}
+.card .inputs .inputs-card.r{
+    animation: dissappeare .3s linear;
+}
+@keyframes dissappeare{
+    from {
+        opacity: 1;
+        margin-left: 0;
+        margin-right: 0;
+    } to {
+        opacity: 0;
+        margin-left: -75px;
+        margin-right: 75px;
+    }
+}
+.card .inputs .input-group{
+    position: relative;
+    margin: 5px 0;
+}
+.card .inputs .input-group label{
+    position: absolute;
+    color: #FC8856;
+    font-size: 12px;
+    border-radius: 20px;
+    left: 20px;
+    top: 0;
+    direction: ltr;
+    box-shadow: none;
+    background-color: #f3f1f19a;
+}
+.card .inputs .input-group label:not(:empty){
+    padding: 2px 7px;
+}
+.card .inputs .input-group .info{
+    position: absolute;
+    top: calc(50% - 8px);
+    left: 5px;
+}
+.card .inputs .input-group .info i{
+    float: left;
+    color: #652781;
+    font-size: 16px;
+    cursor: pointer;
+}
+.card .inputs .input-group .explanation{
+    position: relative;
+    background: rgba(255, 255, 255, 0.66);
+    padding: 3px 6px;
+    font-size: 10px;
+    border-radius: 10px;
+    margin-top: -27.5px;
+    margin-left: -10px;
+    display: none;
+}
+.card .inputs .input-group .info:hover .explanation{
+    display: block;
+}
+.card .inputs .input-group .explanation::before{
+    content: '';
+    position: absolute;
+    left: 10px;
+    bottom: -19px;
+    background: rgba(255, 255, 255, 0.66);
+    height: 20px;
+    width: 20px;
+    clip-path: polygon(100% 0, 0 0, 50% 45%);
+}
+.card .inputs .input-group .bottom-note{
+    font-size: 12px;
+    font-weight: bold;
+    color: #FD8855;
+    position: absolute;
+    bottom: -7.5px;
+    right: 10px;
+}
+.card .inputs input{
+    font-size: 12px;
+    outline: none;
+    width: 100%;
+    margin: 7.5px 0;
+    padding: 12px 5px;
+    text-indent: 10px;
+    border: none;
+    background-color: #f3f1f19a;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.card .inputs .inputs-i input:nth-child(1){
+    border-radius: 0;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.card .inputs .inputs-i input:nth-child(2){
+    border-radius: 0;
+    margin-top: -5px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.card .inputs textarea{
+    height: 80px;
+    resize: none;
+    outline: none;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px 5px 20px 5px;
+    border: none;
+    background-color: #f3f1f19a;
+    border-radius: 20px;
+    text-indent: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.card .inputs textarea::-webkit-scrollbar{
+    display: none;
+}
+.card .inputs .input-group input:not(:placeholder-shown), .card .inputs .input-group textarea:not(:placeholder-shown), .card .inputs .input-group input:not(:placeholder-shown) + label{
+    background-color: #E8F0FE;
+}
+.card .inputs button{
+    padding: 10px 5px;
+    width: 100%;
+    border-radius: 20px;
+    border: 2px solid #8681f5;
+    background: #8681f5;
+    color: white;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: .5s;
+}
+.card .inputs button:hover{
+    background: #e8f0fe8a;
+    color: #8681f5;
+}
+
+.card .inputs .input-group button#logo-btn{
+    width: 50%;
+    margin-right: 25%;
+    border-radius: .1rem;
+    border: none;
+    background: #FC8856;
+}
+.card .inputs .input-group button#logo-btn:hover{
+    background: #ff7135;
+    color: white;
+}
+.card .inputs .input-group button#logo-btn i{
+    font-size: 16px;
+    margin-top: 2px;
+    margin-right: 5px;
+}
+.card .inputs .input-group img.imgshown{
+    position: relative;
+    display: block;
+    width: 80%;
+    margin-right: 10%;
+    border: 2px dotted #ff7135;
+}

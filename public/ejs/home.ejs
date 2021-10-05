@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('../partials/top') %>
+    <meta name="google" content="nositelinkssearchbox" />
+    <meta name="google" content="notranslate" />
+    <link rel="stylesheet" href="css/Home.css" type="text/css">
+</head>
+<body>
+<%- include('../partials/header') %>
+<div class="container">
+    <div class="content" data-aos="fade-up" data-aos-delay="500">
+        <p style="font-weight: bold;">
+            בעלי מקצוע? בעלי עסקים קטנים?
+            <br />
+             במקום להסתבך עם יצירת אתר, בואו וצרו כרטיס ביקור דיגיטלי -
+             <span class="underline">בחינם לגמרי!</span>
+            </p>
+        <% if(bcard == 'exist') { %>
+            <a href="/dashboard">
+                <button class="CreateCard bg-hover-darker">
+                    לניהול הכרטיס
+                    &#8250;
+                </button>
+            </a>
+        <% } else { %>
+            <a href="<%= username != 'undefined' ? '/create' : '/signup' %>">
+                <button class="CreateCard bg-hover-darker">
+                    צור כרטיס
+                    &#8250;
+                </button>
+            </a>
+        <% } %>
+    </div>
+    <div class="img" data-aos="fade-down" data-aos-delay="500">
+        <img src="imgs/mainpage.svg" alt="">
+    </div>
+</div>
+<%- include('../partials/bottom') %>

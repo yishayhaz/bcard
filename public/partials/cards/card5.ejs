@@ -1,0 +1,43 @@
+<style>
+    *{
+        box-sizing: border-box;
+    }
+    .img-group{
+        display: flex;
+        flex-direction: wrap;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 0;
+    }
+    .img-block{
+        margin: 7.5px;
+    }
+    .img-block img{
+        width: 160px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    img:hover, .the_chosen_one{
+        border: 2px solid orange;
+    }
+    .img-block h2{
+        font-size: 12px;
+    }
+</style>
+<input type="hidden" id="bcard_type" value="" name="bcard_type">
+    <div class="img-group">
+        <div class="img-block">
+            <h2>1. Basic</h2>
+            <img type_name="basic" class="bcard-example" src="imgs/basic-bg.svg" alt="basic card">
+        </div>
+        <div class="img-block">
+            <h2>1. Special</h2>
+            <img type_name="space" class="bcard-example" src="imgs/space-bg.svg" alt="space_bg">
+        </div>
+        <div class="img-block">
+            <h2>1. Innovative</h2>
+            <img type_name="innovative" class="bcard-example" src="imgs/innovative-bg.svg" alt="">
+        </div>
+    </div>
+<button type="submit">הבא</button>

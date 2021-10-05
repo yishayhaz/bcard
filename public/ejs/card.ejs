@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partials/top') %>
+    <meta name="description" content="<%= data.description %>" />
+    <meta name="keywords" content="<%= data.bname %>" />
+    <meta name="googlebot">
+    <meta name="robots">
+    <link rel="icon" href="uploads/<%= data.logo_location %>" />
+</head>
+
+<body>
+    <div>
+        <% if(data.bcard_type == 'basic') { %>
+            <%- include('../partials/bcards/basic') %>
+        <% } else if(data.bcard_type == 'space') { %>
+                <%- include('../partials/bcards/space') %>
+        <% } else if(data.bcard_type == "innovative") { %>
+            <%- include('../partials/bcards/innovative') %>
+        <% } else if(data.bcard_type == "special") { %>
+            <%- include('../partials/bcards/special') %>
+        <% } %>
+    </div>
+<%- include('../partials/bottom') %>

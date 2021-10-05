@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('../partials/top') %>
+    <link rel="stylesheet" href="css/cards.css">
+</head>
+<body>
+
+<div class="floating-boxes">
+    <img src="imgs/RectangleCardBg.svg" alt="bg" class="floating-box f-box"/>
+    <img src="imgs/RectangleCardBg.svg" alt="bg" class="floating-box s-box"/>
+</div>
+
+<div class="cards-container">
+    <form action="create" method="POST" enctype="multipart/form-data">
+        <div class="f card">
+            <div class="headline">
+                <h1 id="headline">בואו נתחיל!</h1>
+                <span id="headline-note">נסו לשמור את הטקסטים קצרים וקולעים</span>
+            </div>
+            <div class="inputs">
+                <div class="inputs-card a">
+                    <%- include('../partials/cards/card5') %>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="js/createcard.js"></script>
+<%- include('../partials/bottom') %>
