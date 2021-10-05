@@ -26,7 +26,7 @@ app.use(cookieParser())
 app.use(require('./route'))
 
 mongoose.connect(
-    process.env.MONGODB_URI,
+    process.env.DATABASE_URL,
     { useNewUrlParser: true, useUnifiedTopology: true },
     (data) => console.log(data || 'DB connected!')
 )
