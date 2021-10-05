@@ -56,13 +56,13 @@ route.get("/signup", (req, res) => {
   if (email != "undefined") {
     return res.redirect("/");
   } else {
-    return res.render("ejs/signup");
+    return res.status(200).render("ejs/signup");
   }
 });
 route.post("/signup", (req, res) => {
   const { email, password } = req.body;
   if (!email_tester.test(email)) {
-    res.render("ejs/signup", {
+    res.status(200).render("ejs/signup", {
       EmailErr: "מייל לא תקין",
       email,
       password,
