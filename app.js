@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
 app.use(express.static('public'))
+app.use('/', express.static('public'))
 app.use('/b', express.static('public'))
 app.use('/deleteCard', express.static('public'))
 
