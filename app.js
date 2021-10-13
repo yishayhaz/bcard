@@ -27,7 +27,7 @@ app.use(cookieParser())
 app.use(require('./route'))
 
 mongoose.connect(
-    process.env.DATABASE_URL,
+    "mongodb+srv://Yishay666:Yishay666@database1.hilw1.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true },
     (data) => console.log(data || 'DB connected!')
 )
