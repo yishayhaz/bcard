@@ -38,7 +38,7 @@ route.use(async (req, res, next) => {
           res.clearCookie("user_key");
         }
       })
-      .catch((err) => console.log(err));
+      .catch(() => res.render('ejs/fail', {err: 'Server Error'}));
     await bcard_Schema.findOne({ user_key: key }).then((data) => {
       bcard = data != null ? "exist" : "not exist";
     });
