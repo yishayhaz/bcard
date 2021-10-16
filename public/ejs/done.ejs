@@ -32,13 +32,13 @@
 </style>
 <body>
     <div class="page">
-        <img src="imgs/success.svg" alt="">
+        <img src="../imgs/success.svg" alt="">
         <h2><%= headline %></h2>
         <% if(typeof(link) != 'undefined') { %>
             <p>
                 תוכלו למצוא אותו בקישור הזה:
                 <br>
-                <a class="link" href="http://localhost:3000/b/<%= link %>">http://localhost:3000/b/<%= link %></a>
+                <a class="link" href="/b/<%= link %>">https://dam-bcard.com/b/<%= link %></a>
             </p>
         <% } %>
     </div>

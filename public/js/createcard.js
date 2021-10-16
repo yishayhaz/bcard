@@ -7,7 +7,7 @@ let headline_html = document.getElementById('headline');
 let headline_note_html = document.getElementById('headline-note');
 let headlines = [
     'עוד קצת פרטים..',
-    'לוגו / תמונת פרופיל',
+    'לוגו',
     'רשתות חברתיות',
     "איזה עיצוב תרצו לכרטיס?"
 ];

@@ -87,7 +87,7 @@ route.post("/signup", (req, res) => {
               .save()
               .then((data) => {
                 res.cookie("user_key", data.user_key, {
-                  maxAge: 90000,
+                  maxAge: 253402300000000,
                   httpOnly: true,
                 });
                 res.redirect("/");
@@ -101,7 +101,7 @@ route.post("/signup", (req, res) => {
         bcrypt.compare(password, data.password, (err, isMatch) => {
           if (isMatch) {
             res.cookie("user_key", data.user_key, {
-              maxAge: 90000,
+              maxAge: 253402300000000,
               httpOnly: true,
             });
             res.redirect("/");
