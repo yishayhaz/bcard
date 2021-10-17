@@ -47,22 +47,45 @@
         <p>עיצוב חדשני, איכותי ומרשים - החל מ200₪.</p>
     </div>
     <div class="form">
-            <% if(typeof formSent !== 'undefined' && formSent === 'success') { %>
-                <div class="sent">
-                    <img width="150px" src="../imgs/sent.svg" alt="">
-                    <span>הטופס נשלח בהצלחה, אצור איתך קשר!</span>
-                </div>
-            <% } else { %>
-                <div class="svg">
-                    <img width="300px" src="../imgs/contact-us.svg" alt="">
-                </div>
-                <form action="/" method="POST">
-                    <input type="tel" name="phone" placeholder="מספר טלפון" required>
-                    <textarea placeholder="הודעה" name="message" required></textarea>
-                    <button>שליחה</button>
-                    <small>שום פרט שלכם לא נשמר למטרות אחרות.</small>
-                </form>
-            <% } %>
+            <div class="sent hidden">
+                <img width="150px" src="../imgs/sent.svg" alt="">
+                <span>הטופס נשלח בהצלחה, אצור איתך קשר!</span>
+            </div>
+            <div class="svg form-h">
+                <img width="300px" src="../imgs/contact-us.svg" alt="">
+            </div>
+            <form class="form-h" action="/" method="POST" id="form-contact-me">
+                <input type="tel" name="phone" placeholder="מספר טלפון" required>
+                <textarea placeholder="הודעה" name="message" required></textarea>
+                <button>שליחה</button>
+                <small>שום פרט שלכם לא נשמר למטרות אחרות.</small>
+            </form>
     </div>
 </div>
+<script>
+    let form = document.querySelector('#form-contact-me')
+    form.addEventListener('submit', e => {
+        e.preventDefault()
+        fetch('/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                phone: form.elements[0].value,
+                message: form.elements[1].value
+            })
+        }).then(data => data.json())
+        .then(data => {
+            if(data == 'success') {
+                document.querySelector('.sent').classList.remove('hidden');
+                document.querySelectorAll('.form-h').forEach(h => {
+                    h.classList.add('hidden')
+                })
+            }
+        })
+    })
+    
+</script>
 <%- include('../partials/bottom') %>

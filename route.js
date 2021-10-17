@@ -62,8 +62,7 @@ route.post('/', (req, res) => {
   })
   email.save()
     .then(() => {
-      formSent = 'success';
-      res.redirect('/')
+      res.json('success')
     })
     .catch(() => res.redirect('/error'));
 })
@@ -343,7 +342,7 @@ route.get("/b/:lname", (req, res) => {
         });
       }
     })
-    .catch((err) =>
+    .catch(() =>
       res.redirect('/error')
     );
 });
@@ -374,7 +373,7 @@ route.get("/dashboard", (req, res) => {
   }
 });
 route.post("/editCard", (req, res) => {
-  if (email == "undefined") {
+  if (res.locals.email == "undefined") {
     res.json("התחברו לחשבון ונסו שנית.");
   } else if (["basic", "innovative", "space"].includes(req.body.bcard_type)) {
     bcard_Schema
