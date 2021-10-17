@@ -1,6 +1,4 @@
 # bcard
-digital bussiness card for everyone.
-
 In the main page ('/') you can create your account.
 Your password is being encrypted using the bcrypt library, even I can't see it.
 You get your own special key that randomly generated, which connects you to your account.
