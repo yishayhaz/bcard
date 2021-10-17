@@ -5,6 +5,11 @@
     <meta name="google" content="nositelinkssearchbox" />
     <meta name="google" content="notranslate" />
     <link rel="stylesheet" href="css/Home.css" type="text/css">
+
+    <meta property="og:image" content="">
+    <meta property="og:title" content="D&M bcard">
+    <meta property="og:description" content="מערכת שמאפשרת לכולם לקבל דף באינטרנט, דף איכותי ויפה.">
+
 </head>
 <body>
 <%- include('../partials/header') %>
@@ -34,6 +39,30 @@
     </div>
     <div class="img" data-aos="fade-down" data-aos-delay="500">
         <img src="imgs/mainpage.svg" alt="">
+    </div>
+</div>
+<div class="contact-me">
+    <div class="text">
+        <h2>עיצוב \ הדפסת כרטיסי ביקור</h2>
+        <p>עיצוב חדשני, איכותי ומרשים - החל מ200₪.</p>
+    </div>
+    <div class="form">
+            <% if(typeof formSent !== 'undefined' && formSent === 'success') { %>
+                <div class="sent">
+                    <img width="150px" src="../imgs/sent.svg" alt="">
+                    <span>הטופס נשלח בהצלחה, אצור איתך קשר!</span>
+                </div>
+            <% } else { %>
+                <div class="svg">
+                    <img width="300px" src="../imgs/contact-us.svg" alt="">
+                </div>
+                <form action="/" method="POST">
+                    <input type="tel" name="phone" placeholder="מספר טלפון" required>
+                    <textarea placeholder="הודעה" name="message" required></textarea>
+                    <button>שליחה</button>
+                    <small>שום פרט שלכם לא נשמר למטרות אחרות.</small>
+                </form>
+            <% } %>
     </div>
 </div>
 <%- include('../partials/bottom') %>

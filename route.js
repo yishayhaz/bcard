@@ -1,6 +1,9 @@
 const route = require("express").Router();
+
 const register_Schema = require("./modules/register_Schema");
 const bcard_Schema = require("./modules/bcard_Schema");
+const contactMe_Schema = require("./modules/contact-me");
+
 const multer = require("multer");
 const bcrypt = require("bcrypt");
 
@@ -10,10 +13,6 @@ const unlinkAsync = promisify(fs.unlink);
 
 const email_tester =
   /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-let email = "undefined";
-let key = "";
-let bcard = "not exist";
 
 let storage = multer.diskStorage({
   destination: "./public/uploads",
@@ -31,32 +30,50 @@ route.use(async (req, res, next) => {
       .findOne({ user_key })
       .then((data) => {
         if (data != null) {
-          key = data.user_key;
-          email = data.email;
+          res.locals.key = data.user_key;
+          res.locals.email = data.email;
+          res.locals.username = data.email.split('@')[0];
         } else {
-          email = "undefined";
           res.clearCookie("user_key");
+          res.locals.email = 'undefined';
+          res.locals.username = 'undefined';
         }
       })
-      .catch(() => res.render('ejs/fail', {err: 'Server Error'}));
-    await bcard_Schema.findOne({ user_key: key }).then((data) => {
-      bcard = data != null ? "exist" : "not exist";
+      .catch(() => res.redirect('/error'));
+    await bcard_Schema.findOne({ user_key: res.locals.key }).then((data) => {
+      res.locals.bcard = data != null ? "exist" : "not exist";
     });
   } else {
-    email = "undefined";
+    res.locals.email = 'undefined';
+    res.locals.username = 'undefined';
+    res.locals.bcard = 'undefined';
   }
   next();
 });
 
 route.get("/", async (req, res) => {
-  res.render("ejs/home", { username: email.split("@")[0], bcard });
+  res.render("ejs/home");
 });
 
+route.post('/', (req, res) => {
+  const email = new contactMe_Schema({
+    phone: req.body.phone,
+    message: req.body.message
+  })
+  email.save()
+    .then(() => {
+      formSent = 'success';
+      res.redirect('/')
+    })
+    .catch(() => res.redirect('/error'));
+})
+
 route.get("/signup", (req, res) => {
-  if (email != "undefined") {
+  console.log(res.locals)
+  if (res.locals.email != "undefined") {
     return res.redirect("/");
   } else {
-    return res.render("ejs/signup");
+    return res.render("ejs/signup", { inp_email: 'undefined' });
   }
 });
 route.post("/signup", (req, res) => {
@@ -64,7 +81,7 @@ route.post("/signup", (req, res) => {
   if (!email_tester.test(email)) {
     res.render("ejs/signup", {
       EmailErr: "מייל לא תקין",
-      email,
+      inp_email: email,
       password,
     });
     return;
@@ -92,9 +109,7 @@ route.post("/signup", (req, res) => {
                 });
                 res.redirect("/");
               })
-              .catch((err) => {
-                console.log(err);
-              });
+              .catch(() => res.redirect('/error'));
           });
         });
       } else {
@@ -108,16 +123,16 @@ route.post("/signup", (req, res) => {
           } else {
             res.render("ejs/signup", {
               PassErr: "הסיסמא לא נכונה",
-              email,
+              inp_email: email,
             });
           }
         });
       }
     })
-    .catch((err) => console.log(err));
+    .catch((err) => res.redirect('/error'));
 });
 route.get("/create", (req, res) => {
-  if (email == "undefined" || bcard == "exist") {
+  if (res.locals.email == "undefined" || res.locals.bcard == "exist") {
     return res.redirect("/");
   } else {
     return res.render("ejs/createCard");
@@ -126,10 +141,10 @@ route.get("/create", (req, res) => {
 route.post(
   "/create",
   (req, res, next) => {
-    if (email != "undefined") {
+    if (res.locals.email != "undefined") {
       next();
     } else {
-      res.send("you disconnected from you account");
+      res.render('ejs/fail', { errStatus: 'undefined', err: "you disconnected from you account"});
     }
   },
   upload.single("logo"),
@@ -158,7 +173,7 @@ route.post(
     let findLname = bcard_Schema
       .findOne({ lname })
       .then((data) => (existData = data))
-      .catch((err) => console.log(err));
+      .catch((err) => res.redirect('/error'));
     await findLname;
     if (existData != null) {
       await unlinkAsync(`./public/uploads/${req.file.filename}`);
@@ -207,10 +222,7 @@ route.post(
               })
               .catch((err) => {
                 unlinkAsync(`./public/uploads/${req.file.filename}`);
-                res.render("ejs/fail", {
-                  err: "שגיאה בלתי צפויה אירעה, אנא נסה במועד מאוחר יותר",
-                  errStatus: "undefined",
-                });
+                res.redirect('/error')
               });
           } else {
             unlinkAsync(`./public/uploads/${req.file.filename}`);
@@ -332,10 +344,7 @@ route.get("/b/:lname", (req, res) => {
       }
     })
     .catch((err) =>
-      res.render("ejs/fail", {
-        err: "שגיאה בלתי צפויה אירעה, אנא נסה במועד מאוחר יותר",
-        errStatus: "undefined",
-      })
+      res.redirect('/error')
     );
 });
 
@@ -348,21 +357,17 @@ async function updateViews(lname, v) {
 }
 
 route.get("/dashboard", (req, res) => {
-  if (email != "undefined" && bcard == "exist") {
+  if (res.locals.email !== "undefined" && res.locals.bcard === "exist") {
     bcard_Schema
-      .findOne({ user_key: key })
+      .findOne({ user_key: res.locals.key })
       .then((data) => {
         res.render("ejs/dashboard", {
           success_edit: "false",
           data,
-          username: email.split("@")[0],
         });
       })
       .catch((err) =>
-        res.render("ejs/fail", {
-          err: "שגיאה בלתי צפויה אירעה, אנא נסה במועד מאוחר יותר",
-          errStatus: "undefined",
-        })
+        res.redirect('/error')
       );
   } else {
     return res.redirect("/");
@@ -385,14 +390,14 @@ route.post("/editCard", (req, res) => {
           res.json('העיצוב שונה בהצלחה <i class="fas fa-check-circle"></i>');
         }
       })
-      .catch((err) => res.json("שגיאה, נסו שוב."));
+      .catch((err) => res.redirect('/error'));
   } else {
     res.json("invalid bcard-type");
   }
 });
 route.get("/deleteCard/:user_key", (req, res) => {
   let user_key = req.params.user_key;
-  if (user_key == key) {
+  if (user_key == res.locals.key) {
     bcard_Schema
       .deleteOne({ user_key })
       .then(() =>
@@ -401,10 +406,7 @@ route.get("/deleteCard/:user_key", (req, res) => {
         })
       )
       .catch(() =>
-        res.render("ejs/fail", {
-          err: "שגיאה בלתי צפויה אירעה, אנא נסה במועד מאוחר יותר",
-          errStatus: "undefined",
-        })
+        res.redirect('/error')
       );
   } else {
     res.render("ejs/fail", {
@@ -414,8 +416,16 @@ route.get("/deleteCard/:user_key", (req, res) => {
   }
 });
 
+// error routes
+route.get('/error', (req, res) => {
+  res.render("ejs/fail", {
+    err: "שגיאה לא צפויה, נסו שוב.",
+    errStatus: 'undefined'
+  });
+})
+
 route.get('*', (req, res) => {
-    res.render("ejs/fail", {
+  res.render("ejs/fail", {
         err: "הדף הזה לא קיים",
         errStatus: "404",
     });

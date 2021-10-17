@@ -137,6 +137,11 @@
   background: #6a62f5;
   transition: 0.5s;
 }
+@media (max-width: 666px) {
+  .link a {
+    font-size: 14px;
+  }
+}
 .link a:hover {
   background: #ddd;
   color: #6a62f5;

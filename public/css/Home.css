@@ -14,7 +14,7 @@
 }
 
 .container {
-  height: calc(100vh - 60px);
+  padding: 100px 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -140,4 +140,96 @@
 }
 .about .msg p {
   opacity: 0.5;
+}
+.contact-me {
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.contact-me .text {
+  text-align: center;
+}
+.contact-me .text p {
+  font-size: 14px;
+}
+.contact-me .form {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.contact-me .form .svg {
+  margin: 0 15px;
+  display: grid;
+  place-items: center;
+}
+.contact-me .form form {
+  margin: 30px 15px 0 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.contact-me .form form input,
+.contact-me .form form textarea {
+  font-size: 12px;
+  outline: none;
+  width: 250px;
+  margin: 7.5px 0;
+  padding: 12px 5px;
+  text-indent: 10px;
+  border: none;
+  background-color: #f3f1f188;
+  color: #6a62f5;
+  border-radius: 20px;
+  resize: none;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.contact-me .form form button {
+  width: 100%;
+  margin: 7.5px 0;
+  padding: 12px 5px;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  background: #6a62f5;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.contact-me .form form button:hover {
+  color: #6a62f5;
+  background-color: #fff;
+}
+.contact-me .form form small {
+  font-size: 12px;
+  font-weight: bold;
+}
+.contact-me .form form span {
+  font-size: 12px;
+  background: #6a62f5;
+  color: #fff;
+  font-weight: bold;
+  padding: 2px 7px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.sent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.sent span {
+  margin-top: 20px;
+  background: #6a62f5;
+  border-radius: 20px;
+  padding: 2.5px 10px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
 }

@@ -9,11 +9,11 @@
         <h2>התחברות \ הרשמה</h2>
         <div class="content" >
             <div>
-                <form action="signup" method="POST" data-aos="<%= typeof email != 'undefined' ? '' : 'fade-up' %>" data-aos-delay="<%= typeof email != 'undefined' ? '' : '500' %>">
+                <form action="signup" method="POST" data-aos="<%= inp_email != 'undefined' ? '' : 'fade-up' %>" data-aos-delay="<%= inp_email != 'undefined' ? '' : '500' %>">
                     <label>
                         <label for="email">תיבת אימייל:</label>
                         <input type="email" name="email" placeholder="תיבת האימייל"
-                            value="<%= typeof email != 'undefined' ? email : '' %>"
+                            value="<%= inp_email != 'undefined' ? inp_email : '' %>"
                         >
                         <span class="err">
                             <% if(typeof(EmailErr) != 'undefined') { %> 
@@ -39,7 +39,7 @@
                     <% } %>
                 </form>
             </div>
-            <div class="svg" data-aos="<%= typeof email != 'undefined' ? '' : 'fade-left' %>">
+            <div class="svg" data-aos="<%= inp_email != 'undefined' ? '' : 'fade-left' %>">
                 <img src="imgs/signup.svg" />
             </div>
         </div>
