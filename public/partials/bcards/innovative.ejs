@@ -6,35 +6,6 @@
         margin: 0;
         padding: 0;
     }
-    .line{
-        position: absolute;
-        background: #FF0BAC;
-        border-radius: 10px;
-    }
-    .line-top{
-        width: 95%;
-        height: 5px;
-        top: 10px;
-        left: 2.5%;
-    }
-    .line-bottom{
-        width: 95%;
-        height: 5px;
-        bottom: 10px;
-        left: 2.5%;
-    }
-    .line-left{
-        width: 5px;
-        height: 95%;
-        left: 10px;
-        top: 2.5%;
-    }
-    .line-right{
-        width: 5px;
-        height: 95%;
-        right: 10px;
-        top: 2.5%;
-    }
     body{
         background-color: #333;
     }
@@ -113,6 +84,9 @@
         color: white;
     }
     @media (max-width: 670px){
+        .card{
+            padding: 20px 0;
+        }
         .card .img{
             margin-top: 40px;
         }
@@ -120,14 +94,11 @@
             width: 200px !important;
             height: 200px !important;
         }
+        .card .right .links ul{
+            text-align: center;
+        }
     }
 </style>
-<div class="lines">
-    <div class="line line-top"></div>
-    <div class="line line-right"></div>
-    <div class="line line-bottom"></div>
-    <div class="line line-left"></div>
-</div>
 <div class="card">
     <div class="right">
         <div class="content">
