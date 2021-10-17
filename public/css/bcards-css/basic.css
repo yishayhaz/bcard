@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Varela Round", sans-serif;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.card .left {
+  position: relative;
+  width: 40%;
+  clip-path: polygon(0 0, 66% 0, 100% 100%, 0% 100%);
+  background-color: #cf4d4d;
+  display: grid;
+  place-items: center;
+}
+
+.card .left .logo {
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  left: 17%;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.card .right {
+  width: 60%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  direction: rtl;
+}
+.card .right > div {
+  margin: 15px 0;
+  width: 75%;
+}
+.card .right .content h1 {
+  text-align: center;
+}
+.card .right .content p {
+  width: 500px;
+  max-width: 80%;
+  margin-right: 10%;
+  margin-top: 10px;
+  text-align: center;
+}
+.contact-us {
+  text-align: center;
+}
+.contact-us a i {
+  font-size: 20px;
+}
+.contact-us a {
+  display: inline-block;
+  font-size: 22px;
+  margin: 0 10px;
+  background: cyan;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  line-height: 50px;
+  background: rgba(233, 233, 233, 0.767);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: 0.3s;
+}
+.card .right .contact-us a.whatsapp {
+  color: #4dcf6a;
+}
+.card .right .contact-us a.whatsapp:hover {
+  background: #4dcf6a;
+  color: white;
+}
+
+.card .right .contact-us a.email {
+  color: #cf4d4d;
+}
+.card .right .contact-us a.email:hover {
+  background: #cf4d4d;
+  color: white;
+}
+
+.card .right .contact-us a.tel {
+  color: #cccf4d;
+}
+.card .right .contact-us a.tel:hover {
+  background: #cccf4d;
+  color: white;
+}
+
+.card .right ul {
+  list-style: none;
+  text-align: center;
+}
+.card .right ul i {
+  margin-left: 10px;
+}
+.card .right ul li {
+  direction: rtl;
+  margin: 15px 15px;
+  font-size: 14px;
+}
+a {
+  color: #cf4d4d;
+  text-decoration: none;
+}
+a:focus,
+a:visited {
+  color: #cf4d4d;
+}
+a:hover {
+  text-decoration: underline;
+}
+.location ul li {
+  text-align: center;
+}
+@media (max-width: 991px) {
+  .card {
+    flex-direction: column;
+  }
+  .card .left {
+    padding: 20px 0;
+    width: 100%;
+    clip-path: none;
+    display: grid;
+    place-items: center;
+  }
+  .card .left .logo {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    left: 0;
+  }
+  .card .right {
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+  }
+  .card .right > div {
+    width: 90%;
+  }
+  .card .right .content {
+    margin-top: 50px;
+    display: grid;
+    place-items: center;
+  }
+  .card .right .content p {
+    margin-top: 25px;
+    text-align: center;
+    width: 80%;
+  }
+}
