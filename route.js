@@ -184,14 +184,14 @@ route.post(
     }
 
     if (checkValidation(req.body) == true) {
-      if (email == "undefined") {
+      if (res.locals.email == "undefined") {
         unlinkAsync(`./public/uploads/${req.file.filename}`);
         return res.send("user is not connected");
       } else {
-        bcard_Schema.findOne({ user_key: key }).then((data) => {
+        bcard_Schema.findOne({ user_key: res.locals.key }).then((data) => {
           if (data == null) {
             const new_bcard_Schema = new bcard_Schema({
-              user_key: key,
+              user_key: res.locals.key,
               lname,
               bname,
               description,
