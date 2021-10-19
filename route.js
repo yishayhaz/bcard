@@ -297,7 +297,7 @@ function checkValidation(data) {
     !linkIsValid(data.tiktok_link, ["tiktok.com"])
   )
     fail_message["TKlink"] = "tiktok link ainr valid";
-  if (!["basic", "innovative", "space"].includes(data.bcard_type))
+  if (!["basic", "innovative", "space", "classic"].includes(data.bcard_type))
     fail_message["bcardType"] = "bcard type doesnt found";
 
   if (Object.keys(fail_message).length === 0) return true;
@@ -371,7 +371,7 @@ route.get("/dashboard", (req, res) => {
 route.post("/editCard", (req, res) => {
   if (res.locals.email == "undefined") {
     res.json("התחברו לחשבון ונסו שנית.");
-  } else if (["basic", "innovative", "space"].includes(req.body.bcard_type)) {
+  } else if (["basic", "innovative", "space", "classic"].includes(req.body.bcard_type)) {
     bcard_Schema
       .findOneAndUpdate(
         { user_key: req.body.user_key },
@@ -426,5 +426,4 @@ route.get('*', (req, res) => {
         errStatus: "404",
     });
 })
-
 module.exports = route;

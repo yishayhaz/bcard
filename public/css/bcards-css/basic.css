@@ -22,13 +22,10 @@
 
 .card .left .logo {
   width: 200px;
-  height: 200px;
   position: absolute;
   left: 17%;
-  border-radius: 50%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-
 .card .right {
   width: 60%;
   display: flex;

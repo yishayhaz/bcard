@@ -45,6 +45,7 @@
                             <li class="choice">Basic</li>
                             <li class="choice">Space</li>
                             <li class="choice">Innovative</li>
+                            <li class="choice">Classic</li>
                         </ul>
                     </details>
                     <button class="save">שמירה</button>
@@ -78,9 +79,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.2/FileSaver.js"></script>
 <script>
     let new_type = 'undefined';
-    document.querySelectorAll('.choice').forEach(c => {
+    let choise = document.querySelectorAll('.choice');
+
+    choise.forEach(c => {
+        if(c.innerHTML.toLowerCase() == accepted_data.bcard_type) c.hidden = true;
+    })
+    choise.forEach(c => {
         c.addEventListener('click', () => {
             document.querySelector('summary').innerHTML = c.innerHTML;
+            choise.forEach(c => {
+                c.hidden = false;
+            });
+            c.hidden = 'true';
             document.querySelector('details').open = false;
             document.querySelector('.choice_res').src = `imgs/${c.innerHTML.toLowerCase()}-bg.svg`;
             document.querySelector('.edit_note').innerHTML = '';

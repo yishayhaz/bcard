@@ -49,9 +49,7 @@ body {
   place-items: center;
 }
 .card .img img {
-  width: 200px;
   height: 200px;
-  border-radius: 50%;
 }
 .card .right {
   direction: rtl;

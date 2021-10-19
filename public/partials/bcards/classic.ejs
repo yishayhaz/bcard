@@ -1,29 +1,57 @@
 <div class="card">
-    <div class="left">
-        <img src="uploads/<%= data.logo_location %>" alt="logo" class="logo">
+    <div class="logo">
+        <div class="img">
+            <img src="uploads/<%= data.logo_location %>" class="logo" alt="logo for <%= data.bname %>">
+        </div>
+        <div class="headlines">
+            <h1><%= data.bname %></h1>
+
+            <% if(data.tlocation != '') { %>
+                <a target="_blank" href="<%= data.llocation != "" ? data.llocation : `https://www.google.com/maps/place/${data.tlocation.split(' ').join('+')}` %>">
+                    <%= data.tlocation %>
+                </a>
+            <% } %>
+        </div>
     </div>
-    <div class="right">
-        <div class="content">
-            <h1>
-                <%= data.bname %>
-            </h1>
+    <div class="info">
+        <div class="text">
             <p>
                 <%= data.description %>
             </p>
-        </div>
-        <div class="contact-us">
-            <% if(data.whatsapp !== '') { %>
-                <a class="whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=<%= data.whatsapp %>"><i class="fab fa-whatsapp"></i></a>
-            <% } %>
-            <% if(data.bemail !== '') { %>
-                <a class="email" target="_blank" href="mailto:<%= data.bemail %>"><i class="fas fa-at"></i></a>
-            <% } %>
-            <% if(data.btel !== '') { %>
-                <a class="tel" target="_blank" href="tel:<%= data.btel %>"><i class="fas fa-phone"></i></a>
-            <% } %>
-        </div>
-        <div class="links">
             <ul>
+                <% if(data.whatsapp != '') { %>
+                    <li>
+                        <i class="fab fa-whatsapp"></i>
+                        <a
+                            target="_blank"
+                            href="https://api.whatsapp.com/send?phone=<%= data.whatsapp %>"
+                        >
+                            <%= data.whatsapp %>
+                        </a>
+                    </li>
+                <% } %>
+                <% if(data.bemail != '') { %>
+                    <li>
+                        <i class="far fa-envelope"></i>
+                        <a
+                            target="_blank"
+                            href="mailto:<%= data.bemail %>"
+                        >
+                            <%= data.bemail %>
+                        </a>
+                    </li>
+                <% } %>
+                <% if(data.btel != '') { %>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <a
+                            target="_blank"
+                            href="tel:<%= data.btel %>"
+                        >
+                            <%= data.btel %>
+                        </a>
+                    </li>
+                <% } %>
                 <% if(data.facebook_username != '') { %>
                     <li>
                         <i class="fab fa-facebook"></i>
@@ -82,18 +110,6 @@
                 <% } %>
             </ul>
         </div>
-        <% if(data.tlocation != '') { %>
-            <div class="location">
-                <ul>
-                    <li>
-                        <i class="fas fa-search-location"></i>
-                <a target="_blank" href="<%= data.llocation != "" ? data.llocation : `https://www.google.com/maps/place/${data.tlocation.split(' ').join('+')}` %>">
-                    <%= data.tlocation %>
-                </a>
-                    </li>
-                </ul>
-            </div>
-        <% } %>
     </div>
 </div>
 <script src="../../js/bcard.js"></script>
