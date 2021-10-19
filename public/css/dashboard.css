@@ -1,3 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Secular+One&display=swap");
+.blur {
+  opacity: 0.2 !important;
+}
+.hide {
+  display: none !important;
+}
+.popup-card {
+  position: absolute;
+  top: 50%;
+  width: 300px;
+  max-width: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background: white;
+  padding: 20px 30px;
+  z-index: 10;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 12px;
+}
+.popup-card article {
+  background: linear-gradient(
+    to right,
+    hsl(194, 100%, 62%),
+    hsl(231, 100%, 62%),
+    hsl(281, 100%, 59%)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+.popup-card article h2 {
+  font-family: "Secular One";
+  font-size: 26px;
+}
+.popup-card p {
+  font-size: 14px;
+  margin: 10px 0 20px 0;
+}
+.popup-card p b {
+  display: block;
+  margin-top: 15px;
+}
+.popup-card button {
+  padding: 10px 30px;
+  border: none;
+  background: #6a62f5;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.popup-card button:hover {
+  background: #5a33ca;
+}
 .content {
   display: flex;
   justify-content: center;

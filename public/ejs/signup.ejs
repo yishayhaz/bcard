@@ -6,13 +6,16 @@
 </head>
 <body>
     <div class="container">
+        <div class="goback">
+            <i onclick="location.href = '/'" class="fas fa-arrow-circle-right"></i>
+        </div>
         <h2>התחברות \ הרשמה</h2>
         <div class="content" >
             <div>
                 <form action="signup" method="POST" data-aos="<%= inp_email != 'undefined' ? '' : 'fade-up' %>" data-aos-delay="<%= inp_email != 'undefined' ? '' : '500' %>">
                     <label>
-                        <label for="email">תיבת אימייל:</label>
-                        <input type="email" name="email" placeholder="תיבת האימייל"
+                        <label for="email">כתובת אימייל:</label>
+                        <input type="email" name="email" placeholder="כתובת האימייל"
                             value="<%= inp_email != 'undefined' ? inp_email : '' %>"
                         >
                         <span class="err">
@@ -30,7 +33,7 @@
                             <% } %>
                         </span>
                     </label>
-                    <button type="submit">התחבר</button>
+                    <button type="submit">אישור</button>
                     <% if(typeof(PassErr) != 'undefined') { %>
                         <span class="forgot_password" href="#">
                             שכחת סיסמא?

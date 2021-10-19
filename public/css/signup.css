@@ -1,117 +1,138 @@
-@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Suez+One&display=swap');
-*{
-    padding: 0;
-    margin: 0;
-    font-family: 'Varela Round', sans-serif;
-    direction: rtl;
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Suez+One&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Varela Round", sans-serif;
+  direction: rtl;
 }
-body{
-    background: linear-gradient(90deg, #6A62F5, #2f29a1);
-    background-repeat: no-repeat;
-    display: grid;
-    place-items: center;
-    height: 100vh;
-    min-height: 100vh;
-    max-height: 100vh;
+body {
+  background: linear-gradient(90deg, #6a62f5, #2f29a1);
+  background-repeat: no-repeat;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
 }
-.container{
-    padding-top: 50px;
-    padding-bottom: 50px;
-    width: 900px;
-    max-width: 90%;
-    background-color: white;
-    border-radius: 30px;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.container {
+  position: relative;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  width: 900px;
+  max-width: 90%;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.content{
-    margin-top: 30px;
-    display: flex;
-    flex-wrap: wrap-reverse;
-    justify-content: center;
-    align-items: center;
+.container .goback {
+  position: absolute;
+  top: 20px;
+  right: 40px;
 }
-.content > div{
-    margin: 0 25px;
+.container .goback i {
+  font-size: 22px;
+  color: #6a62f5;
+  box-shadow: 0 0 3px rgb(59, 51, 51);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
 }
-.content .svg{
-    max-width: 80%;
-    display: grid;
-    place-items: center;
+.container .goback i:hover {
+  color: white;
+  background: #6a62f5;
+  box-shadow: 0 0 3px #6a62f5;
 }
-.content img{
-    max-width: 80%;
-    width: 400px;
+.content {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: center;
+  align-items: center;
 }
-.content form{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.content > div {
+  margin: 0 25px;
 }
-.container .content form > label{
-    margin: 10px 0;
-    display: flex;
-    flex-direction: column;
-    color: #7D7575;
-    font-weight: bold;
+.content .svg {
+  max-width: 80%;
+  display: grid;
+  place-items: center;
 }
-.container .content form input{
-    border: none;
-    background-color: #eeeeee;
-    width: 275px;
-    padding: 12px 12px;
-    margin-top: 2.5px;
-    border-radius: 20px;
-    outline: none;
+.content img {
+  max-width: 80%;
+  width: 400px;
 }
-.container .content form input[type="email"]:focus{
-    direction: ltr;
+.content form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.container .content form label label{
-    font-size: 10px;
-    margin-right: 5px;
+.container .content form > label {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  color: #7d7575;
+  font-weight: bold;
 }
-.container .content form .err{
-    font-size: 12px;
-    font-weight: bold;
-    color: #6A62F5;
+.container .content form input {
+  border: none;
+  background-color: #eeeeee;
+  width: 275px;
+  padding: 12px 12px;
+  margin-top: 2.5px;
+  border-radius: 20px;
+  outline: none;
 }
-.container .content form button{
-    width: 220px;
-    height: 35px;
-    background-color: #6A62F5;
-    border: none;
-    margin-top: 20px;
-    color: white;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: .5s;
+.container .content form input[type="email"]:focus {
+  direction: ltr;
 }
-.container .content form button:hover{
-    background-color: #524cc5;
+.container .content form label label {
+  font-size: 10px;
+  margin-right: 5px;
 }
-@media (max-width: 900px){
-    .container{
-        width: 90%;
-    }
-    .content > div{
-        margin: 25px 25px;
-    }
+.container .content form .err {
+  font-size: 12px;
+  font-weight: bold;
+  color: #6a62f5;
 }
-.forgot_password{
-    font-size: 10px;
-    font-family: 'Varela Round';
-    font-weight: bold;
-    color: #524cc5;
-    margin-top: 10px;
+.container .content form button {
+  width: 220px;
+  height: 35px;
+  background-color: #6a62f5;
+  border: none;
+  margin-top: 20px;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.5s;
 }
-.forgot_password a{
-    font-size: 10px;
-    color: #524cc5;
+.container .content form button:hover {
+  background-color: #524cc5;
+}
+@media (max-width: 900px) {
+  .container {
+    width: 90%;
+  }
+  .content > div {
+    margin: 25px 25px;
+  }
+}
+.forgot_password {
+  font-size: 10px;
+  font-family: "Varela Round";
+  font-weight: bold;
+  color: #524cc5;
+  margin-top: 10px;
+}
+.forgot_password a {
+  font-size: 10px;
+  color: #524cc5;
 }

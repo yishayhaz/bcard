@@ -68,7 +68,6 @@ route.post('/', (req, res) => {
 })
 
 route.get("/signup", (req, res) => {
-  console.log(res.locals)
   if (res.locals.email != "undefined") {
     return res.redirect("/");
   } else {
@@ -214,10 +213,7 @@ route.post(
             new_bcard_Schema
               .save()
               .then((data) => {
-                res.render("ejs/done", {
-                  headline: "הכרטיס שלך נוצר בהצלחה!",
-                  link: data.lname,
-                });
+                res.redirect("/dashboard?firstime=true");
               })
               .catch((err) => {
                 unlinkAsync(`./public/uploads/${req.file.filename}`);
@@ -394,16 +390,17 @@ route.post("/editCard", (req, res) => {
     res.json("invalid bcard-type");
   }
 });
-route.get("/deleteCard/:user_key", (req, res) => {
-  let user_key = req.params.user_key;
+route.get("/deleteCard/:user_key/:logo_location", (req, res) => {
+  let { user_key, logo_location } = req.params;
   if (user_key == res.locals.key) {
     bcard_Schema
       .deleteOne({ user_key })
-      .then(() =>
+      .then(() => {
+        unlinkAsync(`./public/uploads/${logo_location}`);
         res.render("ejs/done", {
           headline: "הכרטיס שלך נמחק בהצלחה",
         })
-      )
+      })
       .catch(() =>
         res.redirect('/error')
       );

@@ -11,7 +11,7 @@
     <meta property="og:description" content="מערכת שמאפשרת לכולם לקבל דף באינטרנט, דף איכותי ויפה.">
 
 </head>
-<body>
+<body onload="init()">
 <%- include('../partials/header') %>
 <div class="container">
     <div class="content" data-aos="fade-up" data-aos-delay="500">
@@ -41,10 +41,17 @@
         <img src="imgs/mainpage.svg" alt="">
     </div>
 </div>
+<div class="quote" data-aos="zoom-in">
+    <span>“
+        <span id="quote">
+            הצלחה היא מתכון, אם יש לך את כל הרכיבים, אתה תצליח, מאוד פשוט
+        </span>
+    “</span>
+</div>
 <div class="contact-me">
     <div class="text">
         <h2>עיצוב \ הדפסת כרטיסי ביקור</h2>
-        <p>עיצוב חדשני, איכותי ומרשים - החל מ200₪.</p>
+        <p>שלחו הודעה, ואחזור אליכם עם הצעת מחיר!</p>
     </div>
     <div class="form">
             <div class="sent hidden">
@@ -52,40 +59,100 @@
                 <span>הטופס נשלח בהצלחה, אצור איתך קשר!</span>
             </div>
             <div class="svg form-h">
-                <img width="300px" src="../imgs/contact-us.svg" alt="">
+                <img width="150px" src="../imgs/contact-us.svg" alt="">
             </div>
             <form class="form-h" action="/" method="POST" id="form-contact-me">
-                <input type="tel" name="phone" placeholder="מספר טלפון" required>
-                <textarea placeholder="הודעה" name="message" required></textarea>
+                <input type="tel" id="phone" name="phone" placeholder="מספר טלפון" required>
+                <textarea placeholder="הודעה" name="message" id="message" required></textarea>
                 <button>שליחה</button>
-                <small>שום פרט שלכם לא נשמר למטרות אחרות.</small>
+                <small id="error_field">שום פרט שלכם לא נשמר למטרות אחרות.</small>
             </form>
+    </div>
+</div>
+<div class="footer-top"></div>
+<div class="footer">
+    <div class="copyright">
+        <h2>D&M Bcard</h2>
+        <p>
+            כרטיס ביקור דיגיטלי, שמתאים לכולם.
+            <br>
+            דף באינטרנט, איכותי, יפהיפה ומרשים - בחינם!
+        </p>
+    </div>
+    <div class="icons">
+        <h2>אפשר לדבר איתי גם כאן</h2>
+
+        <div class="icons-labels">
+            <div class="icon-label">
+                <a class="icon-link" href="mailto:yishay11013@gmail.com" target="blank">
+                    <img src="../imgs/footer-svgs/whatsapp.svg" alt="">
+                    <span>מייל</span>
+                </a>
+            </div>
+            <div class="icon-label">
+                <a class="icon-link" href="https://api.whatsapp.com/send?phone=+972546144870" target="blank">
+                    <img src="../imgs/footer-svgs/whatsapp.svg">
+                    <span>ווצאפ</span>
+                </a>
+            </div>
+        </div>
     </div>
 </div>
 <script>
     let form = document.querySelector('#form-contact-me')
+    let phone_val = document.querySelector('#phone');
+    let message_val = document.querySelector('#message');
+    let err = document.querySelector('#error_field');
+
     form.addEventListener('submit', e => {
         e.preventDefault()
-        fetch('/', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                phone: form.elements[0].value,
-                message: form.elements[1].value
-            })
-        }).then(data => data.json())
-        .then(data => {
-            if(data == 'success') {
-                document.querySelector('.sent').classList.remove('hidden');
-                document.querySelectorAll('.form-h').forEach(h => {
-                    h.classList.add('hidden')
+
+        phone_val.value = phone_val.value.replaceAll('-', '');
+        phone_val.value = phone_val.value.replaceAll(' ', '');
+        phone_val.value = phone_val.value.replace('+972', '0')
+
+        message_val.value = message_val.value.replaceAll(' ', '');
+
+        if(!(phone_val.value.length === 9 || phone_val.value.length === 10)) {
+            err.innerHTML = 'מספר טלפון לא תקין'
+        } else if(message_val.value.length < 10 || message_val.value.length > 200){
+            err.innerHTML = 'ההודעה לא באורך המתאים, 10-200.'
+        } else {
+            fetch('/', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    phone: form.elements[0].value,
+                    message: form.elements[1].value
                 })
-            }
-        })
+            })
+            .then(data => data.json())
+            .then(data => {
+                if(data == 'success') {
+                    document.querySelector('.sent').classList.remove('hidden');
+                    document.querySelectorAll('.form-h').forEach(h => {
+                        h.classList.add('hidden')
+                    })
+                }
+            })
+        }
+        
     })
+
+    function init(){
+        let quotes = [
+            "האדם שמזיז הרים, התחיל בלסחוב אבנים קטנות",
+            "מי שלא מוכן לטעות, לעולם לא יגיע למשהו מקורי",
+            "אני מאמין גדול במזל, ושמתי לב שככל שאני עובד קשה יותר, יש לי יותר מזל",
+            "אדם חייב להיות מוכן לוותר על מי שהוא, כדי להפוך למי שהוא יכול להיות",
+            "אנשים אומרים שמוטיבציה לא מחזיקה הרבה זמן. גם מקלחת לא, לכן אנו ממליצים אותה על בסיס יומי",
+            "כשהם אומרים לך שאתה לא יכול, הם מראים לך את הגבולות שלהם, לא שלך",
+        ];
+        document.querySelector('#quote').innerHTML = quotes[Math.floor(Math.random() * quotes.length)];
+    }
     
 </script>
 <%- include('../partials/bottom') %>

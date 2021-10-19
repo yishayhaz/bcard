@@ -6,14 +6,26 @@
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body>
+<div class="popup-card hide">
+    <article>
+        <h2>ביקארד חדש נולד!</h2>
+    </article>
+    <p>
+        זהו פאנל הניהול שלכם, כאן תוכל לראות תהליכים על הכרטיס שלכם, לערוך פרטים ולקבל עדכונים חשובים. 
+        <br>
+        <b>הקישור לכרטיס שלכם נמצא בתחתית העמוד!</b>
+    </p>
+    <button id="close-popup">הבנתי, סגור</button>
+</div>
 <%- include('../partials/header') %>
 <script>
     let accepted_data = {
         user_key: "<%= data.user_key %>",
-        bcard_type: "<%= data.bcard_type %>"
+        bcard_type: "<%= data.bcard_type %>",
+        logo_location: "<%= data.logo_location %>"
     }
 </script>
-<div class="content">
+<div class="content <%= typeof firstime !== 'undefined' ? 'blur' : '' %>">
     <div class="edit">
         <div class="card">
             <img src="uploads/<%= data.logo_location %>" alt="logo of <%= data.lname %>">
@@ -98,7 +110,7 @@
     document.querySelector('.delete_card').addEventListener('click', () => {
         let del = confirm('למחוק את הכרטיס?');
         if(del == true) {
-            window.location.href = `/deleteCard/${accepted_data.user_key}`;
+            window.location.href = `/deleteCard/${accepted_data.user_key}/${accepted_data.logo_location}`;
         }
     })
     function copy(lname) {
@@ -116,6 +128,17 @@
         el.select();
         document.execCommand('copy');
         document.body.removeChild(el);
+    }
+
+    document.querySelector('#close-popup').addEventListener('click', () => {
+        document.querySelector('.content').classList.remove('blur');
+        document.querySelector('.popup-card').classList.add('hide')
+    })
+
+    let url_str = new URL(location.href);
+    if((url_str.searchParams.get("firstime")) == 'true') {
+        document.querySelector('.content').classList.add('blur');
+        document.querySelector('.popup-card').classList.remove('hide')
     }
     </script>
 <%- include('../partials/bottom') %>
