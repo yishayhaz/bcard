@@ -18,38 +18,59 @@
     <button id="close-popup">הבנתי, סגור</button>
 </div>
 <%- include('../partials/header') %>
-<script>
-    let accepted_data = {
-        user_key: "<%= data.user_key %>",
-        bcard_type: "<%= data.bcard_type %>",
-        logo_location: "<%= data.logo_location %>"
-    }
-</script>
 <div class="content <%= typeof firstime !== 'undefined' ? 'blur' : '' %>">
     <div class="edit">
-        <div class="card">
-            <img src="uploads/<%= data.logo_location %>" alt="logo of <%= data.lname %>">
-            <h2><%= data.bname %></h2>
-            <p><%= data.description %></p>
+        <div class="edit-colors">
+            <div class="colors">
+                <div class="color">
+                    <input type="color" id="color" name="color">
+                    <label for="color">טקסט</label>
+                </div>
+                <div class="color">
+                    <input type="color" id="bg" name="bg">
+                    <label for="bg">רקע</label>
+                </div>
+                <div class="color">
+                    <input type="color" id="special-bg" name="special-bg">
+                    <label for="special-bg">רקע משני</label>
+                </div>
+                <div class="color">
+                    <input type="color" id="special-color" name="special-color">
+                    <label for="special-color">טקסט משני</label>
+                </div>
+            </div>
+            <div class="res">
+                <div class="example">
+                    <div class="regular">
+                        <span><%= data.bname %></span>
+                    </div>
+                    <div class="special">
+                        <span><%= data.bname %></span>
+                    </div>
+                </div>
+                <div class="btn">
+                    <button id="change-colors">שמור</button>
+                    <span class="edit_note" id="edit_note_colors"></span>
+                </div>
+            </div>
         </div>
         <img style="border-radius: 10px;" src="https://chart.googleapis.com/chart?cht=qr&chs=125x125&chl=http://dam-bcard.com/b/<%= data.lname %>" />
     </div>
     <div class="board">
         <div class="edit-type-form">
-            <h2>שנה עיצוב</h2>
             <div class="edit-type">
                 <div>
                     <details class="custom-select">
                         <summary><%= data.bcard_type %></summary>
                         <ul class="list">
                             <li class="choice">Basic</li>
-                            <li class="choice">Space</li>
                             <li class="choice">Innovative</li>
                             <li class="choice">Classic</li>
+                            <li class="choice">Smooth</li>
                         </ul>
                     </details>
                     <button class="save">שמירה</button>
-                    <span class="edit_note">
+                    <span class="edit_note" id="edit_note_bcard">
                     </span>
                 </div>
                 <div class="res">
@@ -80,6 +101,48 @@
 <script>
     let new_type = 'undefined';
     let choise = document.querySelectorAll('.choice');
+    let accepted_data = {
+        user_key: "<%= data.user_key %>",
+        bcard_type: "<%= data.bcard_type %>",
+        logo_location: "<%= data.logo_location %>",
+        data_colors: <%- JSON.stringify(data.colors) %>
+    }
+    let colors = {
+        color_i: document.querySelector('#color'),
+        bg_i: document.querySelector('#bg'),
+        special_color_i: document.querySelector('#special-color'),
+        special_bg_i: document.querySelector('#special-bg'),
+    };
+
+    function init(){
+        if(accepted_data.data_colors.bg.includes('rgb')) accepted_data.data_colors.bg = rgb2hex(accepted_data.data_colors.bg)
+        if(accepted_data.data_colors.bg.length == 4) accepted_data.data_colors.bg = hex3(accepted_data.data_colors.bg)
+
+        if(accepted_data.data_colors.color.includes('rgb')) accepted_data.data_colors.color = rgb2hex(accepted_data.data_colors.color)
+        if(accepted_data.data_colors.color.length == 4) accepted_data.data_colors.color = hex3(accepted_data.data_colors.color)
+
+        if(accepted_data.data_colors.special_color.includes('rgb')) accepted_data.data_colors.special_color = rgb2hex(accepted_data.data_colors.special_color)
+        if(accepted_data.data_colors.special_color.length == 4) accepted_data.data_colors.special_color = hex3(accepted_data.data_colors.special_color)
+
+        if(accepted_data.data_colors.special_bg.includes('rgb')) accepted_data.data_colors.special_bg = rgb2hex(accepted_data.data_colors.special_bg)
+        if(accepted_data.data_colors.special_bg.length == 4) accepted_data.data_colors.special_bg = hex3(accepted_data.data_colors.special_bg)
+
+
+        colors.color_i.value = accepted_data.data_colors.color;
+        colors.bg_i.value = accepted_data.data_colors.bg;
+        colors.special_color_i.value = accepted_data.data_colors.special_color;
+        colors.special_bg_i.value = accepted_data.data_colors.special_bg;
+        updateColors()
+
+    }
+    const rgb2hex = (rgb) => `#${rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/).slice(1).map(n => parseInt(n, 10).toString(16).padStart(2, '0')).join('')}`
+    function hex3(value){
+        return value.split("").map((item) => {
+                if(item == "#"){return item}
+                    return item + item;
+            }).join("")
+    }
+    init()
 
     choise.forEach(c => {
         if(c.innerHTML.toLowerCase() == accepted_data.bcard_type) c.hidden = true;
@@ -93,13 +156,52 @@
             c.hidden = 'true';
             document.querySelector('details').open = false;
             document.querySelector('.choice_res').src = `imgs/${c.innerHTML.toLowerCase()}-bg.svg`;
-            document.querySelector('.edit_note').innerHTML = '';
+            document.querySelector('#edit_note_bcard').innerHTML = '';
             new_type = c.innerHTML.toLowerCase();
         })
     })
+    document.querySelectorAll('input[type="color"]')
+    .forEach(color => {
+            color.addEventListener('input', () => updateColors())
+        })
+    function color_values(){
+        return {
+            color: colors.color_i.value,
+            bg: colors.bg_i.value,
+            special_color: colors.special_color_i.value,
+            special_bg: colors.special_bg_i.value,
+        }
+    }
+    function updateColors(){
+        document.querySelector('.regular').style.backgroundColor = color_values().bg;
+        document.querySelector('.regular>span').style.color = color_values().color;
+        document.querySelector('.special').style.backgroundColor = color_values().special_bg;
+        document.querySelector('.special>span').style.color = color_values().special_color;
+    }
+    document.querySelector('#change-colors').addEventListener('click', () => {
+        fetch('/editColors', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user_key: accepted_data.user_key,
+                    colors: {
+                        'color': colors.color_i.value,
+                        'bg': colors.bg_i.value,
+                        'special_color': colors.special_color_i.value,
+                        'special_bg': colors.special_bg_i.value,
+                    },
+                })
+            }).then(res => res.json()).then(data => {
+                document.querySelector('#edit_note_colors').innerHTML = data;
+                setTimeout(() => document.querySelector('#edit_note_colors').innerHTML = '', 3500)
+            })
+    })
     document.querySelector('.save').addEventListener('click', () => {
         if(new_type == 'undefined' || new_type == accepted_data.bcard_type) {
-            document.querySelector('.edit_note').innerHTML = 'אין שינויים לבצע';
+            document.querySelector('#edit_note_bcard').innerHTML = 'אין שינויים לבצע';
         } else {
             fetch('/editCard', {
                 method: 'POST',
@@ -111,9 +213,11 @@
                     user_key: accepted_data.user_key,
                     bcard_type: new_type
                 })
-            }).then(data => data.json())
+            })
+            .then(data => data.json())
             .then(data => {
-                document.querySelector('.edit_note').innerHTML = data;
+                accepted_data.bcard_type = data.bcard_type;
+                document.querySelector('#edit_note_bcard').innerHTML = data.msg;
             })
         }
     })

@@ -41,6 +41,16 @@ const cardSchema = new mongoose.Schema({
     logo_location: {
         required: true,
         type: String
+    },
+    colors: {
+        type: Object,
+        required: false,
+        default: {
+            color: '#000',
+            bg: '#000',
+            special_color: '#000',
+            special_bg: '#000'
+        }
     }
 
 }, { versionKey: false })

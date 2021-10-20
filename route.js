@@ -209,6 +209,7 @@ route.post(
               tlocation,
               llocation,
               logo_location: req.file.filename,
+              colors: set_colors(bcard_type)
             });
             new_bcard_Schema
               .save()
@@ -234,6 +235,36 @@ route.post(
     }
   }
 );
+function set_colors(bcard){
+  let colors = {}
+  switch(bcard.toLowerCase()){
+    case 'classic':
+      colors.color = '#000';
+      colors.bg = '#ddd';
+      colors.special_color = '#ddd';
+      colors.special_bg = 'rgb(24, 24, 24)';
+      break;
+    case 'smooth':
+      colors.color = '#ddd';
+      colors.bg = 'rgb(24, 24, 24)';
+      colors.special_color = '#000';
+      colors.special_bg = '#000';
+      break;
+    case 'innovative':
+      colors.color = '#fff';
+      colors.bg = '#333';
+      colors.special_color = '#2f2133';
+      colors.special_bg = '#ff0bac';
+      break;
+    case 'basic':
+      colors.color = '#333';
+      colors.bg = '#ddd';
+      colors.special_color = '#81cf4d';
+      colors.special_bg = '#cf4d4d';
+      break;
+  }
+  return colors;
+}
 let fail_message = {};
 function checkValidation(data) {
   fail_message = {};
@@ -297,7 +328,7 @@ function checkValidation(data) {
     !linkIsValid(data.tiktok_link, ["tiktok.com"])
   )
     fail_message["TKlink"] = "tiktok link ainr valid";
-  if (!["basic", "innovative", "space", "classic"].includes(data.bcard_type))
+  if (!["basic", "innovative", "classic", "smooth"].includes(data.bcard_type))
     fail_message["bcardType"] = "bcard type doesnt found";
 
   if (Object.keys(fail_message).length === 0) return true;
@@ -371,25 +402,30 @@ route.get("/dashboard", (req, res) => {
 route.post("/editCard", (req, res) => {
   if (res.locals.email == "undefined") {
     res.json("התחברו לחשבון ונסו שנית.");
-  } else if (["basic", "innovative", "space", "classic"].includes(req.body.bcard_type)) {
+  } else if (["basic", "innovative", "classic", "smooth"].includes(req.body.bcard_type)) {
     bcard_Schema
       .findOneAndUpdate(
         { user_key: req.body.user_key },
         { bcard_type: req.body.bcard_type },
-        { useFindAndModify: false }
+        { useFindAndModify: false, new: true }
       )
       .then((data) => {
         if (data == null) {
           res.json("כרטיס לא נמצא");
         } else {
-          res.json('העיצוב שונה בהצלחה <i class="fas fa-check-circle"></i>');
+          res.json({ 'msg': 'העיצוב שונה בהצלחה <i class="fas fa-check-circle"></i>', 'bcard_type': data.bcard_type});
         }
       })
-      .catch((err) => res.redirect('/error'));
+      .catch(() => res.redirect('/error'));
   } else {
     res.json("invalid bcard-type");
   }
 });
+
+route.post('/editColors', (req, res) => {
+  bcard_Schema.findOneAndUpdate({ user_key: req.body.user_key }, { colors: req.body.colors }, { useFindAndModify: false}).then(() => res.json('הצבעים עודכנו <i class="fas fa-check-circle"></i>'))
+})
+
 route.get("/deleteCard/:user_key/:logo_location", (req, res) => {
   let { user_key, logo_location } = req.params;
   if (user_key == res.locals.key) {
@@ -411,7 +447,6 @@ route.get("/deleteCard/:user_key/:logo_location", (req, res) => {
     });
   }
 });
-
 // error routes
 route.get('/error', (req, res) => {
   res.render("ejs/fail", {

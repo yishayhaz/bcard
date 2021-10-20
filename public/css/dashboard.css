@@ -70,9 +70,6 @@
     flex-direction: column;
     height: 150vh;
   }
-  .content .board .edit-type .res img {
-    margin-bottom: 20px;
-  }
   button.save {
     width: calc(100% - 1rem);
   }
@@ -86,29 +83,88 @@
   justify-content: space-evenly;
   flex-direction: column;
 }
-.content .edit .card {
+.edit-colors {
   width: 75%;
   background: white;
   text-align: center;
   padding: 20px 0;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  display: flex;
 }
-.content .edit .card img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.46) 0px 3px 8px;
+.edit-colors > div {
+  flex: 1;
 }
-.content .edit .card h2 {
-  font-size: 20px;
-  margin-top: 10px;
+.edit-colors .colors {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 20px;
 }
-.content .edit .card p {
-  margin-right: 20%;
-  max-width: 60%;
-  text-align: center;
-  margin-top: 10px;
+.edit-colors .colors .color {
+  margin: 5px 0;
+}
+.edit-colors .colors .color label,
+.edit-colors .colors .color input {
+  cursor: pointer;
+}
+.edit-colors .res {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.edit-colors .res .example {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgb(34, 34, 34);
+}
+.edit-colors .res > div {
+  flex: 1;
+}
+.edit-colors .res .example > div {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+}
+.edit-colors .res .example .regular {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 100%;
+}
+.edit-colors .res .example .special {
+  border-top: 0.5px solid gray;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  width: 100%;
+}
+.edit-colors .res button {
+  width: 75px;
+  height: 30px;
+  margin: 10px 1rem 0 0;
+  border-radius: 5px;
+  border: none;
+  background-color: #6a62f5;
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.edit-colors .res button:hover {
+  background: #ddd;
+  color: #6a62f5;
+}
+@media (max-width: 666px) {
+  .content .board .edit-type-form {
+    margin-top: 50px;
+  }
 }
 .content .board .edit-type-form {
   height: 60%;
@@ -117,9 +173,6 @@
   align-items: center;
   justify-content: center;
   align-items: stretch;
-}
-.content .board .edit-type-form h2 {
-  text-align: center;
 }
 .content .board .edit-type {
   height: 50%;
@@ -131,6 +184,12 @@
 }
 .content .board .edit-type .res img {
   width: 150px;
+}
+.content .btn {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-items: center;
+  align-items: center;
 }
 .content .actions {
   height: 30%;

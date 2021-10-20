@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Secular+One&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Varela Round";
+  direction: rtl;
+}
+:root {
+  --text-color: rgb(255, 255, 255);
+  --bg-color: rgb(24, 24, 24);
+}
+.card {
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bg-color);
+
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+.card > div {
+  flex: 1;
+  padding: 50px 0;
+}
+
+@media (max-width: 666px) {
+  .card {
+    flex-direction: column !important;
+  }
+  img.logo {
+    height: 150px;
+  }
+}
+.card .right {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+.card .logo img {
+  height: 300px;
+}
+.card .right .headlines {
+  width: 90%;
+  text-align: center;
+  margin-top: 50px;
+}
+.card .right .headlines h1 {
+  font-size: 36px;
+  font-family: "Secular One";
+  color: var(--text-color);
+}
+.card .right .headlines p {
+  color: var(--text-color);
+}
+.card .left .info {
+  min-height: 80%;
+  margin-top: 10%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+}
+.card .left .info .icon-btns a {
+  display: inline-block;
+  margin: 0 15px;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  background: var(--text-color);
+  color: var(--bg-color);
+  text-align: center;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.card .left .info .icon-btns a:hover {
+  transform: translateY(-15%);
+}
+.card .left .list {
+  margin: 35px 0;
+}
+.card .left ul * {
+  direction: ltr;
+  list-style: none;
+  color: var(--text-color);
+}
+.card .left ul li {
+  margin: 20px 0;
+}
+.card .left ul li i {
+  margin-left: 10px;
+  font-size: 24px;
+}
+.card .left ul li a {
+  font-size: 24px;
+}
+.card .left .info .location li a,
+.card .left .info .location li i {
+  font-size: 18px !important;
+}

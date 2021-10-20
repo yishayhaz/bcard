@@ -5,9 +5,15 @@
   margin: 0;
   padding: 0;
 }
+:root {
+  --bg-color: #333;
+  --text-color: rgb(255, 255, 255);
+  --bg-color-special: #ff0bac;
+  --text-color-special: #2f2133;
+}
 .line {
   position: absolute;
-  background: #ff0bac;
+  background: var(--bg-color-special);
   border-radius: 10px;
 }
 .line-1,
@@ -40,7 +46,7 @@
   }
 }
 body {
-  background-color: #333;
+  background-color: var(--bg-color);
 }
 .card {
   display: flex;
@@ -61,24 +67,25 @@ body {
   max-width: 90%;
 }
 .card .right .content {
-  color: white;
+  color: var(--text-color);
   text-align: center;
 }
 .card .right .content p {
   margin: 25px 10% 25px 0;
   width: 80%;
+  color: var(--text-color);
 }
 .card .right .contact-us a {
   display: inline-block;
   line-height: 50px;
   text-align: center;
   border-radius: 50%;
-  color: #ff0bac;
+  background-color: var(--text-color-special);
+  color: var(--text-color);
   margin: 0 10px;
   height: 50px;
   width: 50px;
   font-size: 22px;
-  background: rgb(47, 33, 51);
   transition: 0.4s;
 }
 .card .right .contact-us a.whatsapp:hover {
@@ -106,22 +113,22 @@ body {
   margin: 10px 0;
 }
 .card .right .links ul li i {
-  color: white;
+  color: var(--text-color);
   margin-left: 20px;
   font-size: 18px;
 }
 .card .right .links ul li a {
-  color: white;
+  color: var(--text-color);
 }
 .location {
   margin-top: 10px;
 }
 .location i {
-  color: white;
+  color: var(--text-color);
   margin-left: 20px;
 }
 .location a {
-  color: white;
+  color: var(--text-color);
 }
 @media (max-width: 670px) {
   .card {

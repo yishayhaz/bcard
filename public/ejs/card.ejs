@@ -15,14 +15,21 @@
     <div>
         <% if(data.bcard_type == 'basic') { %>
             <%- include('../partials/bcards/basic') %>
-        <% } else if(data.bcard_type == 'space') { %>
-                <%- include('../partials/bcards/space') %>
         <% } else if(data.bcard_type == "innovative") { %>
             <%- include('../partials/bcards/innovative') %>
-        <% } else if(data.bcard_type == "special") { %>
-            <%- include('../partials/bcards/special') %>
+        <% } else if(data.bcard_type == "smooth") { %>
+            <%- include('../partials/bcards/smooth') %>
         <% } else if(data.bcard_type == "classic") { %>
             <%- include('../partials/bcards/classic') %>
         <% } %>
     </div>
+<script>
+let root = document.documentElement.style;
+root.setProperty('--text-color', "<%= data.colors.color %>");
+root.setProperty('--bg-color', "<%= data.colors.bg %>");
+root.setProperty('--text-color-special', "<%= data.colors.special_color %>");
+root.setProperty('--bg-color-special', "<%= data.colors.special_bg %>");
+
+</script>
+<script src="../js/bcard.js"></script>
 <%- include('../partials/bottom') %>

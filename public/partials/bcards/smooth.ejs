@@ -1,0 +1,98 @@
+<div class="card">
+    <div class="right">
+        <div class="logo">
+            <img src="uploads/<%= data.logo_location %>" class="logo" alt="">
+        </div>
+        <div class="headlines">
+            <h1><%= data.bname %></h1>
+            <p><%= data.description %></p>
+        </div>
+    </div>
+    <div class="left">
+        <div class="info">
+            <div class="icon-btns">
+                <% if(data.whatsapp !== '') { %>
+                    <a class="whatsapp" target="_blank" href="https://api.whatsapp.com/send?phone=<%= data.whatsapp %>"><i class="fab fa-whatsapp"></i></a>
+                <% } %>
+                <% if(data.bemail !== '') { %>
+                    <a class="email" target="_blank" href="mailto:<%= data.bemail %>"><i class="fas fa-at"></i></a>
+                <% } %>
+                <% if(data.btel !== '') { %>
+                    <a class="tel" target="_blank" href="tel:<%= data.btel %>"><i class="fas fa-phone"></i></a>
+                <% } %>
+            </div>
+            <div class="list">
+                <ul>
+                    <% if(data.facebook_username != '') { %>
+                        <li>
+                            <a
+                                target="_blank"
+                                href=<%= data.facebook_link !== '' ?
+                                    data.facebook_link :
+                                    "https://www.google.com/search?q=" + data.facebook_username + "+site%3Afacebook.com"
+                                %>
+                            >
+                                <%= data.facebook_username %>
+                            </a>
+                            <i class="fab fa-facebook"></i>
+                        </li>
+                    <% } %>
+                    <% if(data.instagram_username != '') { %>
+                        <li>
+                            <a
+                                target="_blank"
+                                href=<%= data.instagram_link !== '' ?
+                                    data.instagram_link :
+                                    "https://www.google.com/search?q=" + data.instagram_username + "+site%3Ainstagram.com"
+                                %>
+                            >
+                                <%= data.instagram_username %>
+                            </a>
+                            <i class="fab fa-instagram"></i>
+                        </li>
+                    <% } %>
+                    <% if(data.twitter_username != '') { %>
+                        <li>
+                            <a
+                                target="_blank"
+                                href=<%= data.twitter_link !== '' ?
+                                    data.twitter_link :
+                                    "https://www.google.com/search?q=" + data.twitter_username + "+site%3Atwitter.com"
+                                %>
+                            >
+                                <%= data.twitter_username %>
+                            </a>
+                            <i class="fab fa-twitter"></i>
+                        </li>
+                    <% } %>
+                    <% if(data.tiktok_username != '') { %>
+                        <li>
+                            <a
+                                target="_blank"
+                                href=<%= data.tiktok_link !== '' ?
+                                    data.tiktok_link :
+                                    "https://www.google.com/search?q=" + data.tiktok_username + "+site%3Atiktok.com"
+                                %>
+                            >
+                                <%= data.tiktok_username %>
+                            </a>
+                            <i class="fab fa-tiktok"></i>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>
+            <% if(data.tlocation != '') { %>
+                <div class="location">
+                    <ul>
+                        <li>
+                            <a target="_blank" href="<%= data.llocation != "" ? data.llocation : `https://www.google.com/maps/place/${data.tlocation.split(' ').join('+')}` %>">
+                                <%= data.tlocation %>
+                            </a>
+                            <i class="fas fa-search-location"></i>
+                        </li>
+                    </ul>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>

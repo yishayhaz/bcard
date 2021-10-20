@@ -4,20 +4,27 @@
   margin: 0;
   font-family: "Varela Round", sans-serif;
 }
-
+:root {
+  --text-color: #333;
+  --bg-color: #ddd;
+  --bg-color-special: #cf4d4d;
+  --text-color-special: #81cf4d;
+}
 .card {
   display: flex;
   flex-direction: row;
   height: 100vh;
+  background: var(--bg-color);
 }
 
 .card .left {
   position: relative;
   width: 40%;
   clip-path: polygon(0 0, 66% 0, 100% 100%, 0% 100%);
-  background-color: #cf4d4d;
+  background-color: var(--);
   display: grid;
   place-items: center;
+  background: var(--bg-color-special);
 }
 
 .card .left .logo {
@@ -40,6 +47,7 @@
 }
 .card .right .content h1 {
   text-align: center;
+  color: var(--color-text);
 }
 .card .right .content p {
   width: 500px;
@@ -47,6 +55,7 @@
   margin-right: 10%;
   margin-top: 10px;
   text-align: center;
+  color: var(--color-text);
 }
 .contact-us {
   text-align: center;
@@ -58,12 +67,11 @@
   display: inline-block;
   font-size: 22px;
   margin: 0 10px;
-  background: cyan;
   height: 50px;
   width: 50px;
   border-radius: 50%;
   line-height: 50px;
-  background: rgba(233, 233, 233, 0.767);
+  background: var(--bg-color);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: 0.3s;
 }
@@ -97,19 +105,18 @@
 }
 .card .right ul i {
   margin-left: 10px;
-}
-.card .right ul li {
   direction: rtl;
   margin: 15px 15px;
   font-size: 14px;
+  color: color(--color-text);
 }
 a {
-  color: #cf4d4d;
+  color: var(--bg-color-special);
   text-decoration: none;
 }
 a:focus,
 a:visited {
-  color: #cf4d4d;
+  color: var(--bg-color-special);
 }
 a:hover {
   text-decoration: underline;
