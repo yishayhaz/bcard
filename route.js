@@ -406,7 +406,7 @@ route.post("/editCard", (req, res) => {
     bcard_Schema
       .findOneAndUpdate(
         { user_key: req.body.user_key },
-        { bcard_type: req.body.bcard_type },
+        { bcard_type: req.body.bcard_type, colors: set_colors(req.body.bcard_type)},
         { useFindAndModify: false, new: true }
       )
       .then((data) => {
@@ -447,6 +447,7 @@ route.get("/deleteCard/:user_key/:logo_location", (req, res) => {
     });
   }
 });
+
 // error routes
 route.get('/error', (req, res) => {
   res.render("ejs/fail", {
