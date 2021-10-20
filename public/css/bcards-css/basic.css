@@ -47,7 +47,7 @@
 }
 .card .right .content h1 {
   text-align: center;
-  color: var(--color-text);
+  color: var(--text-color);
 }
 .card .right .content p {
   width: 500px;
@@ -55,13 +55,14 @@
   margin-right: 10%;
   margin-top: 10px;
   text-align: center;
-  color: var(--color-text);
+  color: var(--text-color);
 }
 .contact-us {
   text-align: center;
 }
 .contact-us a i {
   font-size: 20px;
+  color: var(--bg-color-special);
 }
 .contact-us a {
   display: inline-block;
@@ -71,7 +72,7 @@
   width: 50px;
   border-radius: 50%;
   line-height: 50px;
-  background: var(--bg-color);
+  background: var(--text-color);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: 0.3s;
 }
@@ -108,15 +109,15 @@
   direction: rtl;
   margin: 15px 15px;
   font-size: 14px;
-  color: color(--color-text);
+  color: var(--text-color);
 }
 a {
-  color: var(--bg-color-special);
+  color: var(--text-color);
   text-decoration: none;
 }
 a:focus,
 a:visited {
-  color: var(--bg-color-special);
+  color: var(--text-color);
 }
 a:hover {
   text-decoration: underline;

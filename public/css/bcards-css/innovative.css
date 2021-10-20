@@ -80,8 +80,8 @@ body {
   line-height: 50px;
   text-align: center;
   border-radius: 50%;
-  background-color: var(--text-color-special);
-  color: var(--text-color);
+  background-color: var(--bg-color-special);
+  color: var(--text-color-special);
   margin: 0 10px;
   height: 50px;
   width: 50px;
