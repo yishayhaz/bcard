@@ -1,6 +1,6 @@
 # bcard
 
-http://dam-bcard.com/
+https://dam-bcard.com/
 
 ### Usage:
 
