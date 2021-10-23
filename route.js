@@ -51,6 +51,23 @@ route.use(async (req, res, next) => {
   next();
 });
 
+route.use(['/', '/dashboard'], (req, res, next) => {
+  if(res.locals.bcard == 'exist'){
+    const { rateme } = req.cookies;
+    if(typeof rateme == 'undefined'){
+      // send cookie & rate me pop up
+      res.cookie("rateme", 'not yet', {
+        maxAge: 86400000 * 7,
+        httpOnly: true,
+      });
+      res.locals.rateme = true;
+    } else {
+      res.locals.rateme = true;
+    }
+  }
+  next()
+})
+
 route.get("/", async (req, res) => {
   res.render("ejs/home");
 });
@@ -423,9 +440,13 @@ route.post("/editCard", (req, res) => {
 });
 
 route.post('/editColors', (req, res) => {
-  bcard_Schema.findOneAndUpdate({ user_key: req.body.user_key }, { colors: req.body.colors }, { useFindAndModify: false}).then(() => res.json('הצבעים עודכנו <i class="fas fa-check-circle"></i>'))
+  if(colorChecker(req.body.colors.color) && colorChecker(req.body.colors.bg) && colorChecker(req.body.colors.special_color) && colorChecker(req.body.colors.special_bg)){
+    bcard_Schema.findOneAndUpdate({ user_key: req.body.user_key }, { colors: req.body.colors }, { useFindAndModify: false}).then(() => res.json('הצבעים עודכנו <i class="fas fa-check-circle"></i>'))
+  } else {
+    res.json('צבע שגוי')
+  }
 })
-
+const colorChecker = (color) => /^#[0-9A-F]{6}$/i.test(color);
 route.get("/deleteCard/:user_key/:logo_location", (req, res) => {
   let { user_key, logo_location } = req.params;
   if (user_key == res.locals.key) {
