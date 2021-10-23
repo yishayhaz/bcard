@@ -430,7 +430,12 @@ route.post("/editCard", (req, res) => {
         if (data == null) {
           res.json("כרטיס לא נמצא");
         } else {
-          res.json({ 'msg': 'העיצוב שונה בהצלחה <i class="fas fa-check-circle"></i>', 'bcard_type': data.bcard_type});
+          res.json(
+            {
+              msg: 'העיצוב שונה בהצלחה <i class="fas fa-check-circle"></i>',
+              bcard_type: data.bcard_type,
+              data_colors: data.colors,
+            });
         }
       })
       .catch(() => res.redirect('/error'));

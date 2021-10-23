@@ -105,7 +105,7 @@
         user_key: "<%= data.user_key %>",
         bcard_type: "<%= data.bcard_type %>",
         logo_location: "<%= data.logo_location %>",
-        data_colors: <%- JSON.stringify(data.colors) %>
+        data_colors: JSON.parse('<%-JSON.stringify(data.colors)%>')
     }
     let colors = {
         color_i: document.querySelector('#color'),
@@ -126,7 +126,6 @@
 
         if(accepted_data.data_colors.special_bg.includes('rgb')) accepted_data.data_colors.special_bg = rgb2hex(accepted_data.data_colors.special_bg)
         if(accepted_data.data_colors.special_bg.length == 4) accepted_data.data_colors.special_bg = hex3(accepted_data.data_colors.special_bg)
-
 
         colors.color_i.value = accepted_data.data_colors.color;
         colors.bg_i.value = accepted_data.data_colors.bg;
@@ -215,8 +214,12 @@
                 })
             })
             .then(data => data.json())
-            .then(data => {
-                accepted_data.bcard_type = data.bcard_type;
+            .then((data) => {
+                if(data !== "כרטיס לא נמצא") {
+                    accepted_data.bcard_type = data.bcard_type;
+                    accepted_data.data_colors = data.data_colors;
+                    init()
+                }
                 document.querySelector('#edit_note_bcard').innerHTML = data.msg;
             })
         }
