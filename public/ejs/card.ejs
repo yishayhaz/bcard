@@ -3,11 +3,14 @@
 
 <head>
     <%- include('../partials/top') %>
-    <meta name="Description" content="BCARD NAME: <%= data.bname %>, BCARD DESCRIPTION: <%= data.description %>" />
+    <meta name="robots" />
+    <meta name="og:title" content="<%= data.bname %>">
     <meta name="keywords" content="<%= data.bname %>" />
+    <meta name="description" content="<%= data.bname %>, <%= data.description %> BCARD" />
     <meta name="robots">
     <link rel="icon" href="uploads/<%= data.logo_location %>" />
     <link rel="stylesheet" href="../css/bcards-css/<%= data.bcard_type %>.css">
+    <title><%= data.bname %> || D&M Bcard</title>
 </head>
 
 <body>
